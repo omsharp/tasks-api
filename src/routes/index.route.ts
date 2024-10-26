@@ -3,7 +3,7 @@ import { createRoute, z } from '@hono/zod-openapi';
 import { jsonContent } from 'stoker/openapi/helpers';
 import * as HttpStatusCodes from 'stoker/http-status-codes';
 
-const route = createRouter().openapi(
+const router = createRouter().openapi(
   createRoute({
     tags: ['Index'],
     method: 'get',
@@ -27,4 +27,4 @@ const route = createRouter().openapi(
   }
 );
 
-export default route;
+export default router;
