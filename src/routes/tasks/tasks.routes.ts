@@ -12,8 +12,11 @@ export const tasksListRoute = createRoute({
     [HttpStatusCode.OK]: jsonContent(
       z.array(
         z.object({
-          name: z.string(),
-          done: z.boolean()
+          id: z.number(),
+          title: z.string(),
+          done: z.boolean(),
+          createdAt: z.date(),
+          updatedAt: z.date()
         })
       ),
       'The list of tasks'
