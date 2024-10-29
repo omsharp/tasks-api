@@ -14,7 +14,7 @@ export const tasksListRoute = createRoute({
   responses: {
     [HttpStatusCode.OK]: jsonContent(
       z.array(selectTaskSchema),
-      'The list of tasks'
+      'List of all tasks'
     )
   }
 });
@@ -24,7 +24,7 @@ export const createTaskRoute = createRoute({
   path: '/tasks',
   method: 'post',
   request: {
-    body: jsonContentRequired(insertTaskSchema, 'The task to create')
+    body: jsonContentRequired(insertTaskSchema, 'Create new task')
   },
   responses: {
     [HttpStatusCode.OK]: jsonContent(selectTaskSchema, 'The created task'),
@@ -43,7 +43,7 @@ export const getTaskRoute = createRoute({
     params: IdParamsSchema
   },
   responses: {
-    [HttpStatusCode.OK]: jsonContent(selectTaskSchema, 'Retrieved Task'),
+    [HttpStatusCode.OK]: jsonContent(selectTaskSchema, 'Retrieved task'),
     [HttpStatusCode.UNPROCESSABLE_ENTITY]: jsonContent(
       createErrorSchema(IdParamsSchema),
       'Validation error(s)'

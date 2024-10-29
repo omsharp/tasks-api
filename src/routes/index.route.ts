@@ -1,9 +1,9 @@
-import { createRouter } from '@/lib/create-app';
+import { createRouter } from '@/lib/routing';
 import { createRoute, z } from '@hono/zod-openapi';
 import { jsonContent } from 'stoker/openapi/helpers';
 import * as HttpStatusCodes from 'stoker/http-status-codes';
 
-const router = createRouter().openapi(
+const indexRouter = createRouter().openapi(
   createRoute({
     tags: ['Index'],
     method: 'get',
@@ -27,4 +27,4 @@ const router = createRouter().openapi(
   }
 );
 
-export default router;
+export default indexRouter;

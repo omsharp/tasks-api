@@ -1,11 +1,17 @@
-import { createApp } from '@/lib/create-app.js';
+import { notFound, onError, serveEmojiFavicon } from 'stoker/middlewares';
+import { pinoLogger } from '@/middlewares/pino-logger.js';
 import configureOpenAPI from './lib/openAPI';
 import indextRoute from '@/routes/index.route';
 import tasksRoute from '@/routes/tasks/tasks.index';
-
-const app = createApp();
+import { createRouter } from './lib/routing';
 
 const routes = [indextRoute, tasksRoute];
+
+const app = createRouter();
+app.use(serveEmojiFavicon('📝'));
+app.use(pinoLogger());
+app.notFound(notFound);
+app.onError(onError);
 
 configureOpenAPI(app);
 

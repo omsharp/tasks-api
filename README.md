@@ -1,8 +1,7 @@
-```
-npm install
-npm run dev
-```
+### Backend template
 
-```
-open http://localhost:3000
-```
+- Hono
+- Zod-OpenAPI
+- Drizzle (sqlite)
+- Drizzle-Zod
+- Pino Logger
