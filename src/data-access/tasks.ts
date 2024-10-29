@@ -1,5 +1,7 @@
 import { db } from '@/db';
-import { tasks } from '@/db/schema/tasks';
+import { insertTaskSchema, tasks, updateTaskSchema } from '@/db/schema/tasks';
+import { eq } from 'drizzle-orm';
+import type { z } from 'zod';
 
 export const getAllTasks = async () => {
   return await db.query.tasks.findMany();
@@ -13,13 +15,25 @@ export const getTaskById = async (id: number) => {
   });
 };
 
-export const insertTask = async ({
-  title,
-  done
-}: {
-  title: string;
-  done: boolean;
-}) => {
-  const [task] = await db.insert(tasks).values({ title, done }).returning();
+export const insertTask = async (values: z.infer<typeof insertTaskSchema>) => {
+  const [task] = await db.insert(tasks).values(values).returning();
   return task;
+};
+
+export const updateTask = async (
+  id: number,
+  values: z.infer<typeof updateTaskSchema>
+) => {
+  const [task] = await db
+    .update(tasks)
+    .set(values)
+    .where(eq(tasks.id, id))
+    .returning();
+
+  return task;
+};
+
+export const deleteTask = async (id: number) => {
+  const result = await db.delete(tasks).where(eq(tasks.id, id));
+  return result.rowsAffected > 0;
 };
