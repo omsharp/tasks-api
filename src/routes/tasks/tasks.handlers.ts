@@ -15,20 +15,18 @@ import {
   updateTask
 } from '@/data-access/tasks';
 
-export const tasksListHandler: AppRouteHandler<TasksListRoute> = async (c) => {
+export const getAll: AppRouteHandler<TasksListRoute> = async (c) => {
   const tasks = await getAllTasks();
   return c.json(tasks);
 };
 
-export const createTaskHandler: AppRouteHandler<CreateTaskRoute> = async (
-  c
-) => {
+export const create: AppRouteHandler<CreateTaskRoute> = async (c) => {
   const newTask = c.req.valid('json');
   const insertedTask = await insertTask(newTask);
   return c.json(insertedTask, HttpStatusCode.OK);
 };
 
-export const getTaskHandler: AppRouteHandler<GetTaskRoute> = async (c) => {
+export const find: AppRouteHandler<GetTaskRoute> = async (c) => {
   const { id } = c.req.valid('param');
   const task = await getTaskById(id);
 
@@ -39,9 +37,7 @@ export const getTaskHandler: AppRouteHandler<GetTaskRoute> = async (c) => {
   return c.json(task, HttpStatusCode.OK);
 };
 
-export const updateTaskHandler: AppRouteHandler<UpdateTaskRoute> = async (
-  c
-) => {
+export const update: AppRouteHandler<UpdateTaskRoute> = async (c) => {
   const { id } = c.req.valid('param');
   const values = c.req.valid('json');
   const task = await updateTask(id, values);
@@ -53,9 +49,7 @@ export const updateTaskHandler: AppRouteHandler<UpdateTaskRoute> = async (
   return c.json(task, HttpStatusCode.OK);
 };
 
-export const deleteTaskHandler: AppRouteHandler<DeleteTaskRoute> = async (
-  c
-) => {
+export const remove: AppRouteHandler<DeleteTaskRoute> = async (c) => {
   const { id } = c.req.valid('param');
   const isDeleted = await deleteTask(id);
 

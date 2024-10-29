@@ -15,7 +15,7 @@ import { createErrorSchema, IdParamsSchema } from 'stoker/openapi/schemas';
 
 const tags = ['Tasks'];
 
-export const tasksListRoute = createRoute({
+export const getAll = createRoute({
   tags,
   path: '/tasks',
   method: 'get',
@@ -27,7 +27,7 @@ export const tasksListRoute = createRoute({
   }
 });
 
-export const createTaskRoute = createRoute({
+export const create = createRoute({
   tags,
   path: '/tasks',
   method: 'post',
@@ -43,7 +43,7 @@ export const createTaskRoute = createRoute({
   }
 });
 
-export const getTaskRoute = createRoute({
+export const find = createRoute({
   tags,
   path: '/tasks/{id}',
   method: 'get',
@@ -60,7 +60,7 @@ export const getTaskRoute = createRoute({
   }
 });
 
-export const updateTaskRoute = createRoute({
+export const update = createRoute({
   tags,
   path: '/tasks/{id}',
   method: 'patch',
@@ -78,7 +78,7 @@ export const updateTaskRoute = createRoute({
   }
 });
 
-export const deleteTaskRoute = createRoute({
+export const remove = createRoute({
   tags,
   path: '/tasks/{id}',
   method: 'delete',
@@ -95,8 +95,8 @@ export const deleteTaskRoute = createRoute({
   }
 });
 
-export type TasksListRoute = typeof tasksListRoute;
-export type CreateTaskRoute = typeof createTaskRoute;
-export type GetTaskRoute = typeof getTaskRoute;
-export type UpdateTaskRoute = typeof updateTaskRoute;
-export type DeleteTaskRoute = typeof deleteTaskRoute;
+export type TasksListRoute = typeof getAll;
+export type CreateTaskRoute = typeof create;
+export type GetTaskRoute = typeof find;
+export type UpdateTaskRoute = typeof update;
+export type DeleteTaskRoute = typeof remove;
